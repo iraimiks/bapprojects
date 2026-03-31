@@ -273,20 +273,22 @@
       </div>
       
       <div class="max-w-2xl mx-auto border-sharp p-6 md:p-10 bg-white">
-        <form id="contactForm" class="space-y-6" action="https://api.web3forms.com/submit" method="POST">
+        <form class="space-y-6" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="f9427d08-1921-4a9e-a956-4f8c5d08c1cd">
           <div>
             <label class="block text-sm font-bold uppercase tracking-wide mb-1 mono-text" data-key="formName">Full name</label>
-            <input type="text" id="name" required class="w-full border-sharp px-4 py-3 bg-white text-black focus:outline-none focus:ring-0 focus:border-black transition" placeholder="">
+            <input type="text" id="name" name="name" required class="w-full border-sharp px-4 py-3 bg-white text-black focus:outline-none focus:ring-0 focus:border-black transition" placeholder="">
           </div>
           <div>
             <label class="block text-sm font-bold uppercase tracking-wide mb-1 mono-text" data-key="formEmail">Work email</label>
-            <input type="email" id="email" required class="w-full border-sharp px-4 py-3 bg-white text-black focus:outline-none" placeholder="">
+            <input type="email" id="email" name="email" required class="w-full border-sharp px-4 py-3 bg-white text-black focus:outline-none" placeholder="">
           </div>
           <div>
             <label class="block text-sm font-bold uppercase tracking-wide mb-1 mono-text" data-key="formMessage">Key process to automate</label>
-            <textarea id="message" rows="3" required class="w-full border-sharp px-4 py-3 bg-white resize-none focus:outline-none" placeholder=""></textarea>
+            <textarea id="message" rows="3" name="message" required class="w-full border-sharp px-4 py-3 bg-white resize-none focus:outline-none" placeholder=""></textarea>
           </div>
+          <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
           <div class="pt-2">
             <button type="submit" id="submitBtn" class="w-full md:w-auto px-8 py-3 border-sharp bg-black text-white font-medium text-base hover:bg-white hover:text-black transition-colors duration-200 cursor-pointer" data-key="formSubmit">Send inquiry →</button>
           </div>
@@ -586,25 +588,7 @@
         feedbackPara.classList.add('text-red-700', 'block');
         setTimeout(() => feedbackPara.classList.add('hidden'), 3000);
         return;
-      }
-      
-      const submitBtn = document.getElementById('submitBtn');
-      const originalText = submitBtn.innerText;
-      submitBtn.innerText = currentLang === 'en' ? 'Sending...' : 'Sūta...';
-      submitBtn.disabled = true;
-      
-      setTimeout(() => {
-        submitBtn.innerText = originalText;
-        submitBtn.disabled = false;
-        feedbackPara.textContent = translations[currentLang].formSuccess;
-        feedbackPara.classList.remove('hidden', 'text-red-700');
-        feedbackPara.classList.add('text-black', 'border-sharp', 'p-2', 'bg-gray-50', 'block');
-        contactForm.reset();
-        setTimeout(() => {
-          feedbackPara.classList.add('hidden');
-          feedbackPara.classList.remove('border-sharp', 'p-2', 'bg-gray-50');
-        }, 5000);
-      }, 800);
+      } 
     });
   </script>
 </body>
